@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Crypto Dashboard — Live</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Chart.js CDN -->
+  <!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Date adapter (required for time scale) -->
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <h1 id="app-title">Crypto Dashboard</h1>
+    <div class="controls" role="navigation" aria-label="Dashboard controls">
+      <label class="visually-hidden" for="coin-select">Choose coin</label>
+      <select id="coin-select" aria-label="Select cryptocurrency">
+        <option value="bitcoin" selected>Bitcoin (BTC)</option>
+        <option value="ethereum">Ethereum (ETH)</option>
+        <option value="dogecoin">Dogecoin (DOGE)</option>
+      </select>
+
+      <div class="date-filter" role="group" aria-label="Quick date ranges">
+        <button class="range-btn" data-days="7" aria-pressed="false">7d</button>
+        <button class="range-btn" data-days="30" aria-pressed="false">30d</button>
+        <button class="range-btn" data-days="90" aria-pressed="false">90d</button>
+        <button class="range-btn" data-days="365" aria-pressed="false">1y</button>
+      </div>
+
+      <div class="custom-range" role="group" aria-label="Custom date range">
+        <label class="visually-hidden" for="from-date">From</label>
+        <input id="from-date" type="date">
+        <label class="visually-hidden" for="to-date">To</label>
+        <input id="to-date" type="date">
+        <button id="apply-range">Apply</button>
+      </div>
+
+      <div class="extras">
+        <label for="theme-toggle" class="theme-label">🌙</label>
+        <input id="theme-toggle" type="checkbox" aria-label="Toggle dark mode">
+      </div>
+    </div>
+  </header>
+
+  <main id="main" role="main">
+    <section class="summary" aria-live="polite" aria-atomic="true">
+      <div class="card" id="price-card" tabindex="0" role="region" aria-label="Current price">
+        <div class="card-title">Price</div>
+        <div class="card-value" id="current-price">—</div>
+      </div>
+      <div class="card" id="marketcap-card" tabindex="0" role="region" aria-label="Market cap">
+        <div class="card-title">Market Cap</div>
+        <div class="card-value" id="market-cap">—</div>
+      </div>
+      <div class="card" id="change-card" tabindex="0" role="region" aria-label="24 hour change">
+        <div class="card-title">24h Change</div>
+        <div class="card-value" id="price-change">—</div>
+      </div>
+    </section>
+
+    <section class="chart-section" role="region" aria-label="Price chart">
+      <canvas id="priceChart" width="800" height="400" aria-label="Price line chart"></canvas>
+    </section>
+
+    <section class="table-section" role="region" aria-label="Historical prices">
+      <h2>Historical Prices</h2>
+      <table id="priceTable">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Price (USD)</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <small>Data from CoinGecko • Built with vanilla JS + Chart.js</small>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
